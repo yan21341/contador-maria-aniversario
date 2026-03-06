@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Contador</title>
+
+<style>
+
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+font-family:Arial;
+text-align:center;
+color:white;
+margin-top:70px;
+}
+
+h1{
+font-size:50px;
+color:#ff7af6;
+text-shadow:0 0 10px #ff00cc;
+}
+
+#total{
+font-size:35px;
+color:#00ffe1;
+margin-top:20px;
+}
+
+#contador{
+font-size:45px;
+margin-top:25px;
+color:#ffd900;
+text-shadow:0 0 8px #ff9900;
+}
+
+#barra{
+width:80%;
+height:30px;
+background:#333;
+margin:40px auto;
+border-radius:20px;
+overflow:hidden;
+}
+
+#progresso{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#00ffcc,#00aaff,#a200ff);
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Dias até o aniversário de 17 da Maria 🎉</h1>
+
+<div id="total"></div>
+
+<div id="contador"></div>
+
+<div id="barra">
+<div id="progresso"></div>
+</div>
+
+<script>
+
+var inicio = new Date("2026-03-06T17:12:00").getTime();
+var destino = new Date("2027-10-14T00:00:00").getTime();
+
+setInterval(function(){
+
+var agora = new Date().getTime();
+var tempo = destino - agora;
+
+var totalDias = Math.floor(tempo / (1000*60*60*24));
+
+var anos = Math.floor(totalDias / 365);
+var meses = Math.floor((totalDias % 365) / 30);
+var semanas = Math.floor((totalDias % 30) / 7);
+var dias = (totalDias % 30) % 7;
+
+var horas = Math.floor((tempo % (1000*60*60*24)) / (1000*60*60));
+var minutos = Math.floor((tempo % (1000*60*60)) / (1000*60));
+var segundos = Math.floor((tempo % (1000*60)) / 1000);
+
+document.getElementById("total").innerHTML =
+totalDias + " dias restantes";
+
+document.getElementById("contador").innerHTML =
+anos + " anos, " +
+meses + " meses, " +
+semanas + " semanas, " +
+dias + " dias, " +
+horas + " horas, " +
+minutos + " minutos, " +
+segundos + " segundos";
+
+var progresso = ((agora - inicio) / (destino - inicio)) * 100;
+
+document.getElementById("progresso").style.width = progresso + "%";
+
+},1000);
+
+</script>
+
+</body>
+</html>
